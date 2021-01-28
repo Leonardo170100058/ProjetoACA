@@ -49,5 +49,124 @@ include "twitteroauth/twitteroauth.php";
         </form>
         <br><br>
 
+            <div id="tweetsContainer">
+
+                <?php
+                    if(isset($_POST['marcelo'])){
+                        marcelo();
+                    }
+                    if(isset($_POST['mayan'])){
+                        mayan();
+                    }
+                    if(isset($_POST['vitorino'])){
+                        vitorino();
+                    }
+                    if(isset($_POST['anagomes'])){
+                        anagomes();
+                    }
+                    if(isset($_POST['marisamatias'])){
+                        marisamatias();
+                    }
+                    if(isset($_POST['joaoferreira'])){
+                        joaoferreira();
+                    }
+                    if(isset($_POST['andreventura'])){
+                        andreventura();
+                    }
+
+                function marcelo(){
+                        $consumer_key = "nk1jhCuVj1bPzIiuZXrhfyJ8t";
+                        $consumer_secret = "p4lxJm8qzyxuW4pr365E8u5po637U7QNY96CXVzU37jnImDzpa";
+                        $access_token = "1919433620-ZQT32jBZHnjSblRFxOL8XEYB5B2uTM6HkNQcrQg";
+                        $access_token_secret = "TuQEMfacCOFcdwn04f3nclGkeVn6PHQgyeQy2DrijpQuk";
+                        $twitter = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
+                        $tweetsMarcelo = $twitter->get('https://api.twitter.com/1.1/search/tweets.json?q=Marcelo Rebelo De Sousa&result_type=recent&count=30');
+
+                        foreach ($tweetsMarcelo->statuses as $key => $tweet) { ?>
+                            <img src="<?=$tweet->user->profile_image_url;?>" />
+                            <?=$tweet->text; ?><br>
+                        <?php }
+                    }
+
+                function mayan(){
+                    $consumer_key = "nk1jhCuVj1bPzIiuZXrhfyJ8t";
+                    $consumer_secret = "p4lxJm8qzyxuW4pr365E8u5po637U7QNY96CXVzU37jnImDzpa";
+                    $access_token = "1919433620-ZQT32jBZHnjSblRFxOL8XEYB5B2uTM6HkNQcrQg";
+                    $access_token_secret = "TuQEMfacCOFcdwn04f3nclGkeVn6PHQgyeQy2DrijpQuk";
+                    $twitter = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
+                    $tweetsMayan = $twitter->get('https://api.twitter.com/1.1/search/tweets.json?q=Tiago Mayan&result_type=recent&count=30');
+                    foreach ($tweetsMayan->statuses as $key => $tweet) { ?>
+                        <img src="<?=$tweet->user->profile_image_url;?>" />
+                        <?=$tweet->text; ?><br>
+                    <?php }
+                }
+
+                function vitorino(){
+                    $consumer_key = "nk1jhCuVj1bPzIiuZXrhfyJ8t";
+                    $consumer_secret = "p4lxJm8qzyxuW4pr365E8u5po637U7QNY96CXVzU37jnImDzpa";
+                    $access_token = "1919433620-ZQT32jBZHnjSblRFxOL8XEYB5B2uTM6HkNQcrQg";
+                    $access_token_secret = "TuQEMfacCOFcdwn04f3nclGkeVn6PHQgyeQy2DrijpQuk";
+                    $twitter = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
+                    $tweetsVitorino = $twitter->get('https://api.twitter.com/1.1/search/tweets.json?q=Vitorino Silva&result_type=recent&count=30');
+                    foreach ($tweetsVitorino->statuses as $key => $tweet) { ?>
+                        <img src="<?=$tweet->user->profile_image_url;?>" />
+                        <?=$tweet->text; ?><br>
+                    <?php }
+                }
+
+                function anagomes(){
+                    $consumer_key = "nk1jhCuVj1bPzIiuZXrhfyJ8t";
+                    $consumer_secret = "p4lxJm8qzyxuW4pr365E8u5po637U7QNY96CXVzU37jnImDzpa";
+                    $access_token = "1919433620-ZQT32jBZHnjSblRFxOL8XEYB5B2uTM6HkNQcrQg";
+                    $access_token_secret = "TuQEMfacCOFcdwn04f3nclGkeVn6PHQgyeQy2DrijpQuk";
+                    $twitter = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
+                    $tweetsAnaGomes = $twitter->get('https://api.twitter.com/1.1/search/tweets.json?q=Ana Gomes&result_type=recent&count=30');
+                    foreach ($tweetsAnaGomes->statuses as $key => $tweet) { ?>
+                        <img src="<?=$tweet->user->profile_image_url;?>" />
+                        <?=$tweet->text; ?><br>
+                    <?php }
+                }
+
+                function marisamatias(){
+                    $consumer_key = "nk1jhCuVj1bPzIiuZXrhfyJ8t";
+                    $consumer_secret = "p4lxJm8qzyxuW4pr365E8u5po637U7QNY96CXVzU37jnImDzpa";
+                    $access_token = "1919433620-ZQT32jBZHnjSblRFxOL8XEYB5B2uTM6HkNQcrQg";
+                    $access_token_secret = "TuQEMfacCOFcdwn04f3nclGkeVn6PHQgyeQy2DrijpQuk";
+                    $twitter = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
+                    $tweetsMarisa = $twitter->get('https://api.twitter.com/1.1/search/tweets.json?q=Marisa Matias&result_type=recent&count=30');
+                    foreach ($tweetsMarisa->statuses as $key => $tweet) { ?>
+                        <img src="<?=$tweet->user->profile_image_url;?>" />
+                        <?=$tweet->text; ?><br>
+                    <?php }
+                }
+
+                function joaoferreira(){
+                    $consumer_key = "nk1jhCuVj1bPzIiuZXrhfyJ8t";
+                    $consumer_secret = "p4lxJm8qzyxuW4pr365E8u5po637U7QNY96CXVzU37jnImDzpa";
+                    $access_token = "1919433620-ZQT32jBZHnjSblRFxOL8XEYB5B2uTM6HkNQcrQg";
+                    $access_token_secret = "TuQEMfacCOFcdwn04f3nclGkeVn6PHQgyeQy2DrijpQuk";
+                    $twitter = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
+                    $tweetsJoaoFerreira = $twitter->get('https://api.twitter.com/1.1/search/tweets.json?q=João Ferreira&result_type=recent&count=30');
+                    foreach ($tweetsJoaoFerreira->statuses as $key => $tweet) { ?>
+                        <img src="<?=$tweet->user->profile_image_url;?>" />
+                        <?=$tweet->text; ?><br>
+                    <?php }
+                }
+
+                function andreventura(){
+                    $consumer_key = "nk1jhCuVj1bPzIiuZXrhfyJ8t";
+                    $consumer_secret = "p4lxJm8qzyxuW4pr365E8u5po637U7QNY96CXVzU37jnImDzpa";
+                    $access_token = "1919433620-ZQT32jBZHnjSblRFxOL8XEYB5B2uTM6HkNQcrQg";
+                    $access_token_secret = "TuQEMfacCOFcdwn04f3nclGkeVn6PHQgyeQy2DrijpQuk";
+                    $twitter = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
+                    $tweetsAndreVentura = $twitter->get('https://api.twitter.com/1.1/search/tweets.json?q=André Ventura&result_type=recent&count=30');
+                    foreach ($tweetsAndreVentura->statuses as $key => $tweet) { ?>
+                        <img src="<?=$tweet->user->profile_image_url;?>" />
+                        <?=$tweet->text; ?><br>
+                    <?php }
+                }
+                ?>
+
+            </div>
         </body>
 </html>
