@@ -16,9 +16,18 @@ include "twitteroauth/twitteroauth.php";
     <meta charset="UTF-8">
     <title>Twitter API SEARCH</title>
     </head>
+
         <body>
 
         <p>Presidenciais 2021 Twitter Feed</p>
+        <br><br>
+
+        <div id="resultadosEleicoes" style="height: 370px; width: 100%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <br><br>
+
+        <div id="resultadosEleicoes2016" style="height: 370px; width: 100%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         <br><br>
 
         <form action="" method="post">
@@ -39,6 +48,6 @@ include "twitteroauth/twitteroauth.php";
 
         </form>
         <br><br>
-        
+
         </body>
 </html>
