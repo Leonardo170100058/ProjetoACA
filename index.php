@@ -9,6 +9,84 @@ include "twitteroauth/twitteroauth.php";
 
 ?>
 
+<?php
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "votosPresidenciais";
+
+//Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+//Check connection
+if($conn->connect_error){
+    die("Connection failed: ".$conn->connect_error);
+}
+
+
+//Querys para localizar valores eleicoes 2021
+$marcelo = "SELECT percentagem FROM candidatos WHERE id='1';";
+$ana = "SELECT percentagem FROM candidatos WHERE id='2';";
+$andre = "SELECT percentagem FROM candidatos WHERE id='3';";
+$joao = "SELECT percentagem FROM candidatos WHERE id='4';";
+$marisa = "SELECT percentagem FROM candidatos WHERE id='5';";
+$tiago = "SELECT percentagem FROM candidatos WHERE id='6';";
+$vitorino = "SELECT percentagem FROM candidatos WHERE id='7';";
+$branco = "SELECT percentagem FROM candidatos WHERE id='8';";
+$nulos = "SELECT percentagem FROM candidatos WHERE id='9';";
+$abstencao = "SELECT percentagem FROM candidatos WHERE id='10';";
+
+
+//Coneções com a base de dados
+$result = mysqli_query($conn, $marcelo);
+$result1 = mysqli_query($conn, $ana);
+$result2 = mysqli_query($conn, $andre);
+$result3 = mysqli_query($conn, $joao);
+$result4 = mysqli_query($conn, $marisa);
+$result5 = mysqli_query($conn, $tiago);
+$result6 = mysqli_query($conn, $vitorino);
+$result7 = mysqli_query($conn, $branco);
+$result8 = mysqli_query($conn, $nulos);
+$result9 = mysqli_query($conn, $abstencao);
+
+
+$resultCheck = mysqli_num_rows($result);
+
+//Verificação se existem dados para introduzir
+if($resultCheck > 0) {
+
+    $marcelo1 = mysqli_fetch_assoc($result);
+    $ana1 = mysqli_fetch_assoc($result1);
+    $andre1 = mysqli_fetch_assoc($result2);
+    $joao1 = mysqli_fetch_assoc($result3);
+    $marisa1 = mysqli_fetch_assoc($result4);
+    $tiago1 = mysqli_fetch_assoc($result5);
+    $vitorino1 = mysqli_fetch_assoc($result6);
+    $branco1 = mysqli_fetch_assoc($result7);
+    $nulos1 = mysqli_fetch_assoc($result8);
+    $abstencao1 = mysqli_fetch_assoc($result9);
+
+//Adicionar valores a nossa tabela
+        $dataPoints = array(
+            array("y" => $abstencao1 ['percentagem'], "label" => "Abstenção"),
+            array("y" => $nulos1 ['percentagem'] , "label" => "Votos Nulos"),
+            array("y" => $branco1 ['percentagem'] , "label" => "Em Branco"),
+            array("y" => $vitorino1 ['percentagem'] , "label" => "Votorino Silva"),
+            array("y" => $tiago1 ['percentagem'] , "label" => "Tiago Mayan"),
+            array("y" => $marisa1 ['percentagem'] , "label" => "Marisa Matias"),
+            array("y" => $joao1 ['percentagem'] , "label" => "João Ferreira"),
+            array("y" => $andre1 ['percentagem'] , "label" => "André Ventura"),
+            array("y" => $ana1 ['percentagem'], "label" => "Ana Gomes"),
+            array("y" => $marcelo1['percentagem'], "label" => "Marcelo Rebelo de Sousa")
+        );
+
+    }
+
+// Close connection
+mysqli_close($conn);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,17 +94,40 @@ include "twitteroauth/twitteroauth.php";
     <meta charset="UTF-8">
     <title>Twitter API SEARCH</title>
     </head>
+    <script>
 
+        window.onload = function(){
+            var chart = new CanvasJS.Chart("resultadosEleicoes", {
+                animationEnabled: true,
+                title:{
+                    text: "Eleições Presidenciais 2021"
+                },
+                axisY:{
+                    title: "Percentagens Por Candidato",
+                    includeZero: true,
+                    prefix: "%",
+                },
+                data: [{
+                    type: "bar",
+                    yValueFormatString: "#,##%",
+                    indexLabel: "{y}",
+                    indexLabelPlacement: "inside",
+                    indexLabelFontWeight: "bolder",
+                    indexLabelFontColor: "white",
+                    dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+                }]
+            });
+            chart.render();
+        }
+
+
+    </script>
         <body>
 
         <p>Presidenciais 2021 Twitter Feed</p>
         <br><br>
 
         <div id="resultadosEleicoes" style="height: 370px; width: 100%;"></div>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-        <br><br>
-
-        <div id="resultadosEleicoes2016" style="height: 370px; width: 100%;"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         <br><br>
 
