@@ -37,6 +37,18 @@ $branco = "SELECT percentagem FROM candidatos WHERE id='8';";
 $nulos = "SELECT percentagem FROM candidatos WHERE id='9';";
 $abstencao = "SELECT percentagem FROM candidatos WHERE id='10';";
 
+//Querys para localizar valores eleicoes 2016
+$marcelo16 = "SELECT percentagem FROM candidatos2016 WHERE id='1';";
+$sampaio = "SELECT percentagem FROM candidatos2016 WHERE id='2';";
+$marisa16 = "SELECT percentagem FROM candidatos2016 WHERE id='3';";
+$maria = "SELECT percentagem FROM candidatos2016 WHERE id='4';";
+$edgar = "SELECT percentagem FROM candidatos2016 WHERE id='5';";
+$vitorino = "SELECT percentagem FROM candidatos2016 WHERE id='6';";
+$paulo = "SELECT percentagem FROM candidatos2016 WHERE id='7';";
+$henrique = "SELECT percentagem FROM candidatos2016 WHERE id='8';";
+$branco16 = "SELECT percentagem FROM candidatos2016 WHERE id='11';";
+$nulos16 = "SELECT percentagem FROM candidatos2016 WHERE id='12';";
+$abstencao16 = "SELECT percentagem FROM candidatos2016 WHERE id='13';";
 
 //Coneções com a base de dados
 $result = mysqli_query($conn, $marcelo);
@@ -50,6 +62,18 @@ $result7 = mysqli_query($conn, $branco);
 $result8 = mysqli_query($conn, $nulos);
 $result9 = mysqli_query($conn, $abstencao);
 
+//Coneções com a base de dados 2016
+$result16 = mysqli_query($conn, $marcelo16);
+$result161 = mysqli_query($conn, $sampaio);
+$result162 = mysqli_query($conn, $marisa16);
+$result163 = mysqli_query($conn, $maria);
+$result164 = mysqli_query($conn, $edgar);
+$result165 = mysqli_query($conn, $vitorino);
+$result166 = mysqli_query($conn, $paulo);
+$result167 = mysqli_query($conn, $henrique);
+$result1610 = mysqli_query($conn, $branco16);
+$result1611 = mysqli_query($conn, $nulos16);
+$result1612 = mysqli_query($conn, $abstencao16);
 
 $resultCheck = mysqli_num_rows($result);
 
@@ -67,6 +91,18 @@ if($resultCheck > 0) {
     $nulos1 = mysqli_fetch_assoc($result8);
     $abstencao1 = mysqli_fetch_assoc($result9);
 
+    $marcelo16 = mysqli_fetch_assoc($result16);
+    $sampaio = mysqli_fetch_assoc($result161);
+    $marisa16 = mysqli_fetch_assoc($result162);
+    $maria = mysqli_fetch_assoc($result163);
+    $edgar = mysqli_fetch_assoc($result164);
+    $vitorino = mysqli_fetch_assoc($result165);
+    $paulo = mysqli_fetch_assoc($result166);
+    $henrique = mysqli_fetch_assoc($result167);
+    $branco16 = mysqli_fetch_assoc($result1610);
+    $nulos16 = mysqli_fetch_assoc($result1611);
+    $abstencao16 = mysqli_fetch_assoc($result1612);
+
 //Adicionar valores a nossa tabela
         $dataPoints = array(
             array("y" => $abstencao1 ['percentagem'], "label" => "Abstenção"),
@@ -79,6 +115,20 @@ if($resultCheck > 0) {
             array("y" => $andre1 ['percentagem'] , "label" => "André Ventura"),
             array("y" => $ana1 ['percentagem'], "label" => "Ana Gomes"),
             array("y" => $marcelo1['percentagem'], "label" => "Marcelo Rebelo de Sousa")
+        );
+
+        $dataPoints16 = array(
+            array("y" => $abstencao16 ['percentagem'], "label" => "Abstenção"),
+            array("y" => $nulos16 ['percentagem'] , "label" => "Votos Nulos"),
+            array("y" => $branco16 ['percentagem'] , "label" => "Em Branco"),
+            array("y" => $henrique ['percentagem'] , "label" => "Henrique Neto"),
+            array("y" => $paulo ['percentagem'] , "label" => "Paulo de Morais"),
+            array("y" => $vitorino ['percentagem'] , "label" => "Vitorino Silva"),
+            array("y" => $edgar ['percentagem'], "label" => "Edgar Silva"),
+            array("y" => $maria['percentagem'], "label" => "Maria de Belém"),
+            array("y" => $marisa16 ['percentagem'] , "label" => "Marisa Matias"),
+            array("y" => $sampaio ['percentagem'], "label" => "Sampaio da Nóvoa"),
+            array("y" => $marcelo16['percentagem'], "label" => "Marcelo Rebelo de Sousa")
         );
 
     }
@@ -118,6 +168,29 @@ mysqli_close($conn);
                 }]
             });
             chart.render();
+
+            var chart2016 = new CanvasJS.Chart("resultadosEleicoes2016", {
+                animationEnabled: true,
+                title:{
+                    text: "Eleições Presidenciais 2016"
+                },
+                axisY:{
+                    title: "Percentagens Por Candidato",
+                    includeZero: true,
+                    prefix: "%",
+                },
+                data: [{
+                    type: "bar",
+                    yValueFormatString: "#,##%",
+                    indexLabel: "{y}",
+                    indexLabelPlacement: "inside",
+                    indexLabelFontWeight: "bolder",
+                    indexLabelFontColor: "white",
+                    dataPoints: <?php echo json_encode($dataPoints16, JSON_NUMERIC_CHECK); ?>
+                }]
+            });
+            chart2016.render();
+
         }
 
 
@@ -128,6 +201,10 @@ mysqli_close($conn);
         <br><br>
 
         <div id="resultadosEleicoes" style="height: 370px; width: 100%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <br><br>
+
+        <div id="resultadosEleicoes2016" style="height: 370px; width: 100%;"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         <br><br>
 
